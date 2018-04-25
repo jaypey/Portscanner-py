@@ -25,7 +25,7 @@ def portScan(tgtHost, tgtPorts):
         tgtName = gethostbyaddr(tgtIP)
         print('\n[+] Scan results for : ' + tgtName[0])
     except:
-        print('\n[+] Scan results for : ' + tgtNameIP)
+        print('\n[+] Scan results for : ' + tgtIP)
     setdefaulttimeout(1)
     for tgtPort in tgtPorts:
         print('Scanning port ' + tgtPort)
@@ -48,8 +48,8 @@ def main():
     )
     args = parser.parse_args()
     tgtHost = args.tgtHost
-    tgtPorts = args.tgtPort
-    if(tgtHost == None) | (tgtPorts[0] == None):
+    tgtPorts = str(args.tgtPort).split(", ")
+    if not tgtHost and not tgtPorts:
         print('[-]You must specify a target host and port[s].')
         exit(0)
     portScan(tgtHost, tgtPorts)
